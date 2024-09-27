@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+      const fetchData = async () => {
+          try {
+              const response = await axios.get('http://127.0.0.1:8000/api/items/');
+              console.log(response.data);  // Add this line to log the response
+              setItems(response.data);
+          } catch (error) {
+              console.error("Error fetching data:", error); // Log any errors
+          }
+      };
+      fetchData();
+  }, []);
+  
+
+    return (
+        <div>
+            <h1>Items</h1>
+            <ul>
+                {items.map(item => (
+                    <li key={item.id}>{item.name}</li>
+                ))}
+            </ul>
+        </div>
+    );
 }
 
 export default App;
