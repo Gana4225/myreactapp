@@ -19,11 +19,11 @@ function App() {
   
 
     return (
-        <div>
+        <div style={{backgroundColor:'gray',display:'flex',alignItems:'center',margin:'50px'}}>
             <h1>Items</h1>
-            <ul>
+            <ul style={{backgroundColor:'black'}}>
                 {items.map(item => (
-                    <li key={item.id}>{item.name}</li>
+                    <li key={item.id} style={{color:'red'}}>{item.name}</li>
                 ))}
             </ul>
         </div>
